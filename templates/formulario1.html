@@ -1,0 +1,20 @@
+{%extends 'layout.html'%}
+{%block content%}
+
+<h3>Calculador de Operaciones</h3>
+<form action="/resultado" method="POST">
+    <label>N1:</label>
+    <input type = "text" name="n1"/>
+    <label>N2:</label>
+    <input type = "text" name="n2"/>
+    <br>
+    <input type="radio" name="operaciones" value="+"> Suma
+    <input type="radio" name="operaciones" value="-"> Resta
+    <input type="radio" name="operaciones" value="*"> Multiplicación
+    <input type="radio" name="operaciones" value="/"> División
+
+    <input type="submit" class="btn"/>
+</form>
+
+
+{%endblock%}
