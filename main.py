@@ -27,10 +27,45 @@ def resultado():
             resultado = int(num1)*int(num2)
         elif str(operacion) == "/":
             msj = "división"
-            resultado = int(num1)/int(num2)
-
-        
+            resultado = int(num1)/int(num2)        
         return "<h1>La {} es: {} </h1>".format(msj,str(resultado))
+
+@app.route("/Cine",methods=["GET","POST"])
+def resultadoCine():
+    if request.method == "POST":
+        numeroBoletos= int(request.form.get("numBoletos"))
+        tieneTarjetaCine= int(request.form.get("tarjetaCine"))
+        precioBoleto = 12
+        numCompradores = int(request.form.get("numCompradores"))
+        boletosPermitidos = numCompradores*7
+
+        #Valida descuento por cantidad de boletos
+        if numeroBoletos <= boletosPermitidos:
+            
+            if numeroBoletos > 5:
+                descuento = 0.15
+            elif numeroBoletos in [3,4,5]:
+                descuento = 0.10
+            else:
+                descuento = 0 
+
+            subtotal = numeroBoletos*precioBoleto
+            precioTotal = subtotal - (subtotal*descuento)
+            
+            descuentoTarjeta = 0.10 if (tieneTarjetaCine == 1) else 0
+            
+
+            if descuentoTarjeta == 0 :
+                return render_template("cinepolis.html",res=precioTotal)
+            else:
+                #Calculamos Total 
+                precioTotal = precioTotal - (precioTotal*descuentoTarjeta)
+                return render_template("cinepolis.html", res=precioTotal)
+        else:
+            return render_template("cinepolis.html", res="La cantidad permitida de boletos por persona es de 7")
+    #Petición GET devuelve la pagina.
+    return render_template("cinepolis.html")
+
 
 #Metodo que inicializa la aplicacion del proyecto
 

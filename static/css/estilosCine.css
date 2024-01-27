@@ -1,0 +1,24 @@
+body{
+    background-image: url('../img/fondoCine.jpg'); /* Ruta relativa a la carpeta del CSS */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ajusta el tamaño de la imagen al tamaño del contenedor */
+}
+#nombreF{
+    width: 120px;
+    text-align: left;
+    font-weight: bold;
+}
+#seccionFormulario{
+    background-color: hsla(180, 100%, 97%, 0.655);
+    padding: 2%;
+    border-radius: 20px;
+    margin: 3%;
+    width: 400px;
+}
+#seccionRespuesta{
+    background-color: hsla(180, 100%, 97%, 0.655);
+    padding: 2%;
+    border-radius: 20px;
+    margin: 3%;
+    width: 400px;
+}
