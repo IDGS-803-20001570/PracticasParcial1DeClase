@@ -1,0 +1,57 @@
+{%extends 'layout.html'%}
+
+{%block content %}
+{% import "_macros.html" as macros %}
+<section style="margin: 5%;">
+
+    <h3>Resistencias</h3>
+
+    <form method="POST" class="form-inline">
+ 
+        {{macros.render_field(form.color1)}}
+        {{macros.render_field(form.color2)}}
+        {{macros.render_field(form.color3)}}
+
+        <div class="control-group">
+            <label class="control-label" style="font-weight: bolder;">Tolerancia:</label>
+            <label class="radio">
+                <input type="radio" name="tolerancia" value="oro"> Oro
+            </label>
+            <label class="radio">
+                <input type="radio" name="tolerancia" value="plata" checked> Plata
+            </label>
+        </div>
+
+        <input type="submit" name="btn1" value="Calcular" class="btn btn-primary" >
+    </form>
+
+    <table class="table  table-bordered">
+        <thead>
+            <tr>
+                <th>Color 1</th>
+                <th>Color 2</th>
+                <th>Color 3</th>
+                <th>Tolerancia</th>
+                <th>Valor</th>
+                <th>Valor Mínimo</th>
+                <th>Valor Máximo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for registro in registros %}
+            <tr>
+                <td style="background-color:{{ registro.colorCelda1 }};">{{ registro.color1 }}</td>
+                <td style="background-color:{{ registro.colorCelda2 }};">{{registro.color2}}</td>
+                <td style="background-color:{{ registro.colorCelda3 }};">{{registro.color3}}</td>
+                <td style="background-color:{{ registro.colorCelda4 }};">{{registro.tolerancia}}</td>
+                <td>{{registro.valor}}</td>
+                <td>{{registro.valorMinimo}}</td>
+                <td>{{registro.valorMaximo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>    
+
+
+{%endblock%}
