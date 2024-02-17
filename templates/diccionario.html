@@ -1,0 +1,49 @@
+{%extends 'layout.html'%}
+
+{%block content %}
+{% import "_macros.html" as macros %}
+<section style="margin: 5%;">
+
+    <h3>Diccionario Datos</h3>
+    <h4>Registro Palabras</h4>
+
+    <form method="POST" class="form-horizontal" novalidate>
+ 
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Palabra Ingles:</label>
+            <div class="controls">
+              {{macros.render_field_diccionario(form1.palabraIngles)}}
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Palabra Español:</label>
+            <div class="controls">
+                {{macros.render_field_diccionario(form1.palabraEspañol)}}
+            </div>            
+        </div>
+        <input type="submit" name="btn1" value="Guardar" class="btn btn-primary" >
+    </form>
+
+    <form method="GET" class="form-horizontal" novalidate>
+ 
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Palabra Buscada:</label>
+            <div class="controls">
+              {{macros.render_field_diccionario(form2.palabraBuscada)}}
+            </div>
+        </div>  
+        <div class="control-group">
+            <label class="radio">
+                {{ macros.render_field_diccionario(form2.idioma) }}
+            </label>
+        </div>      
+        <input type="submit" name="btn2" value="Traducir" class="btn btn-primary" >
+    </form>
+
+    <h1>Respuesta: {{resultado}}</h1>
+
+</section>    
+
+
+{%endblock%}

@@ -1,5 +1,20 @@
 from wtforms import Form
 from wtforms import StringField,SelectField,RadioField,EmailField,IntegerField
+from wtforms import validators
+
+class diccionarioDatos(Form):
+    palabraIngles= StringField('palabraIngles',[
+        validators.DataRequired(message='Es necesario ingresar una palabra')
+    ])
+    palabraEspañol= StringField('palabraEspañol',[
+        validators.DataRequired(message='Es necesario ingresar una palabra')
+    ])
+class diccionarioDatosResp(Form):
+    palabraBuscada= StringField('palabraBuscada',[
+        validators.DataRequired(message='Es necesario ingresar una palabra')
+    ])
+    idioma = RadioField('idioma', choices=[(1, 'Ingles'), (2, 'Español')])
+
 
 class distanciaPuntos(Form):
     X1=IntegerField('X1')

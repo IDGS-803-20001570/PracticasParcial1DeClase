@@ -28,6 +28,52 @@ def distancia():
 
     return render_template("distancia.html",form=distancia_form,resultado=resultado)
 
+
+@app.route("/diccionario",methods=["GET","POST"])
+def diccionario():
+    resultado = ""
+    diccionarioForm1=forms.diccionarioDatos(request.form)
+    diccionarioForm2=forms.diccionarioDatosResp(request.form)
+    palabraBuscada=diccionarioForm2.palabraBuscada.data 
+
+    if request.method == 'POST' and diccionarioForm1.validate():
+        palabraIngles=str(diccionarioForm1.palabraIngles.data)
+        palabraEspañol=str(diccionarioForm1.palabraEspañol.data)
+        
+        # Permite escribir en el documento
+        with open("diccionario.txt", "a") as archivo:
+            archivo.write(f"{palabraIngles.upper()}={palabraEspañol.upper()}\n")
+
+        resultado = str("Se guardo registro de forma existosa")
+    elif request.method == 'GET':
+        palabraBuscada = str(request.args.get('palabraBuscada'))
+        palabraBuscada = palabraBuscada.upper()
+        idioma=request.args.get('idioma')
+
+        print(palabraBuscada)
+        print(idioma)
+        
+        if palabraBuscada:
+            diccionario = {}
+            
+            # Haz algo con el idioma seleccionado (por ejemplo, imprimirlo)
+            print("Idioma seleccionado:", idioma)            
+
+            with open("diccionario.txt", "r") as archivo:
+                for linea in archivo:
+                    if "=" in linea:
+                        palabra_ingles, palabra_espanol = linea.strip().split("=")
+                        
+                        if idioma == '1':
+                            diccionario[palabra_espanol] = palabra_ingles
+                        else:
+                            diccionario[palabra_ingles] = palabra_espanol
+                            
+
+            resultado = diccionario.get(palabraBuscada, "No se encontró traducción")
+
+    return render_template("diccionario.html", form1=diccionarioForm1, form2=diccionarioForm2, resultado=resultado)
+
 @app.route("/resistencias",methods=["GET","POST"])
 def resistencias():
     resultado = ""

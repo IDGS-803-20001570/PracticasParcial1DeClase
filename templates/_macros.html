@@ -6,3 +6,14 @@
 {% macro render_field_chino(field) %}
 <dd>{{ field(**kwargs)|safe }}</dd>
 {% endmacro %}
+
+{% macro render_field_diccionario(field) %}
+<dd>{{ field(**kwargs)|safe }}</dd>
+{%if field.errors%}
+<ul>
+    {%for error in field.errors%}
+    <li style="color: red;">{{error}}</li>
+    {%endfor%}
+</ul>
+{%endif%}
+{% endmacro %}
